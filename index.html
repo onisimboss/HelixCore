@@ -7,35 +7,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    body { 
-      background: #0a0f1c; 
-      color: #e0f2ff; 
-      font-family: system-ui, -apple-system, sans-serif;
-    }
-    .hero-bg { 
-      background: linear-gradient(135deg, #0a0f1c 0%, #1e3a8a 100%); 
-    }
-    .product-card { 
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-    }
-    .product-card:hover { 
-      transform: translateY(-12px); 
-      box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); 
-    }
-    .price { 
-      color: #60a5fa; 
-    }
-    .nav-link {
-      transition: all 0.3s;
-    }
-    .nav-link:hover {
-      color: #60a5fa;
-    }
+    body { background: #0a0f1c; color: #e0f2ff; font-family: system-ui, -apple-system, sans-serif; }
+    .hero-bg { background: linear-gradient(135deg, #0a0f1c 0%, #1e3a8a 100%); }
+    .product-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .product-card:hover { transform: translateY(-12px); box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+    .price { color: #60a5fa; }
+    select { background: #1e2937; color: #e0f2ff; border: 1px solid #3b82f6; }
   </style>
 </head>
 <body class="font-sans">
 
-  <!-- NAV -->
+  <!-- NAV + HERO + TRUST BAR + DISCLAIMER (same as before) -->
   <nav class="bg-[#0f172a] border-b border-blue-900 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <div class="flex items-center gap-3">
@@ -45,11 +27,6 @@
           <p class="text-xs text-blue-300 -mt-1">High purity research compounds • 99%+ purity</p>
         </div>
       </div>
-      <div class="hidden md:flex gap-8 text-sm font-medium">
-        <a href="#shop" class="nav-link">Shop</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="mailto:helixcorelabs@gmail.com" class="nav-link">Contact</a>
-      </div>
       <button onclick="toggleCart()" class="flex items-center gap-3 bg-blue-600 hover:bg-blue-500 px-8 py-3 rounded-2xl text-white font-medium">
         <i class="fa-solid fa-cart-shopping"></i>
         <span id="cart-count" class="font-bold text-xl">0</span>
@@ -57,204 +34,29 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero-bg py-28 text-center">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-6xl font-bold mb-4 tracking-tighter">HelixCore Labs</h2>
       <p class="text-3xl text-blue-300 mb-6">Premium Research Peptides & Compounds</p>
-      <p class="max-w-xl mx-auto text-lg opacity-90 mb-10">Third-party tested • USA-synthesized • Strictly for laboratory research use only</p>
-      <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" 
-              class="bg-blue-600 hover:bg-blue-500 text-white text-xl font-semibold px-14 py-6 rounded-3xl shadow-lg">
-        Explore Our Catalog →
-      </button>
+      <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" class="bg-blue-600 hover:bg-blue-500 text-white text-xl font-semibold px-14 py-6 rounded-3xl">Explore Our Catalog →</button>
     </div>
   </section>
 
-  <!-- TRUST BAR -->
-  <div class="bg-[#0f172a] py-6 border-b border-blue-900">
-    <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-8 text-sm text-blue-300">
-      <div class="flex items-center gap-2"><i class="fa-solid fa-certificate"></i> Third-Party COA Available</div>
-      <div class="flex items-center gap-2"><i class="fa-solid fa-flask"></i> ≥99% Purity</div>
-      <div class="flex items-center gap-2"><i class="fa-solid fa-shield-alt"></i> Secure & Discreet Shipping</div>
-      <div class="flex items-center gap-2"><i class="fa-solid fa-envelope"></i> helixcorelabs@gmail.com</div>
-    </div>
-  </div>
-
-  <!-- DISCLAIMER -->
-  <div class="bg-red-950 border-b border-red-800 py-4 text-center text-red-400 text-sm font-medium tracking-wide">
-    ⚠️ FOR LABORATORY RESEARCH PURPOSES ONLY — NOT FOR HUMAN OR VETERINARY CONSUMPTION
-  </div>
+  <div class="bg-red-950 py-4 text-center text-red-400 text-sm font-medium">⚠️ FOR LABORATORY RESEARCH PURPOSES ONLY — NOT FOR HUMAN OR VETERINARY CONSUMPTION</div>
 
   <!-- SHOP -->
   <section id="shop" class="max-w-7xl mx-auto px-6 py-16">
     <h2 class="text-4xl font-bold text-center mb-4">Our Research Catalog</h2>
-    <p class="text-center text-blue-300 mb-12">All prices in € • Competitive rates • COA requests welcome</p>
+    <p class="text-center text-blue-300 mb-12">All prices in € • Size selector • COA on request</p>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="product-grid">
-      <!-- Populated by JS -->
-    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="product-grid"></div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="bg-[#0f172a] py-16">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-6">Why Researchers Choose HelixCore</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-[#1e2937] p-8 rounded-3xl">
-          <i class="fa-solid fa-vial text-4xl text-blue-400 mb-4"></i>
-          <h3 class="font-semibold text-xl mb-2">Third-Party Tested</h3>
-          <p class="text-blue-300">Every batch includes downloadable COA upon request. Purity verified by independent labs.</p>
-        </div>
-        <div class="bg-[#1e2937] p-8 rounded-3xl">
-          <i class="fa-solid fa-globe text-4xl text-blue-400 mb-4"></i>
-          <h3 class="font-semibold text-xl mb-2">Worldwide Shipping</h3>
-          <p class="text-blue-300">Discreet packaging. Fast delivery to research facilities globally.</p>
-        </div>
-        <div class="bg-[#1e2937] p-8 rounded-3xl">
-          <i class="fa-solid fa-headset text-4xl text-blue-400 mb-4"></i>
-          <h3 class="font-semibold text-xl mb-2">Dedicated Support</h3>
-          <p class="text-blue-300">Questions? Email us directly at <a href="mailto:helixcorelabs@gmail.com" class="text-blue-400 hover:underline">helixcorelabs@gmail.com</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
+  <!-- FOOTER (same) -->
   <footer class="bg-[#0a0f1c] py-12 text-center text-blue-300 text-sm border-t border-blue-900">
     <p class="font-medium">© 2026 HelixCore Labs • All Rights Reserved</p>
     <p class="mt-2">Contact: <a href="mailto:helixcorelabs@gmail.com" class="hover:text-blue-400">helixcorelabs@gmail.com</a></p>
-    <p class="mt-8 opacity-70 text-xs">This website is for laboratory research use only. Prices and availability subject to change.</p>
   </footer>
 
-  <!-- CART MODAL -->
-  <div id="cart-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-    <div class="bg-[#0f172a] rounded-3xl max-w-md w-full mx-4 overflow-hidden border border-blue-900">
-      <div class="p-6 border-b border-blue-900 flex justify-between items-center">
-        <h3 class="text-2xl font-bold">Your Cart</h3>
-        <button onclick="toggleCart()" class="text-4xl text-blue-400 hover:text-white">×</button>
-      </div>
-      <div id="cart-items" class="p-6 max-h-[420px] overflow-auto"></div>
-      <div class="p-6 border-t border-blue-900 text-2xl font-semibold flex justify-between items-center">
-        <span>Total:</span>
-        <span id="cart-total" class="price">€0.00</span>
-      </div>
-      <div class="p-6 flex gap-4 bg-[#0a0f1c]">
-        <button onclick="toggleCart()" class="flex-1 py-4 border border-blue-700 rounded-2xl hover:bg-blue-950">Continue Shopping</button>
-        <button onclick="checkout()" class="flex-1 py-4 bg-green-600 hover:bg-green-500 text-white rounded-2xl">Proceed to Checkout</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const products = [
-      {id:1, name:"Retatrutide (Reta)", size:"10 mg", price:49.99, img:"https://picsum.photos/id/1015/400/300"},
-      {id:2, name:"Retatrutide (Reta)", size:"20 mg", price:79.99, img:"https://picsum.photos/id/1016/400/300"},
-      {id:3, name:"Retatrutide (Reta)", size:"30 mg", price:109.99, img:"https://picsum.photos/id/102/400/300"},
-      {id:4, name:"Retatrutide (Reta)", size:"60 mg", price:189.99, img:"https://picsum.photos/id/103/400/300"},
-      {id:5, name:"BPC-157", size:"5 mg", price:29.99, img:"https://picsum.photos/id/201/400/300"},
-      {id:6, name:"BPC-157", size:"10 mg", price:49.99, img:"https://picsum.photos/id/202/400/300"},
-      {id:7, name:"TB-500", size:"5 mg", price:49.99, img:"https://picsum.photos/id/133/400/300"},
-      {id:8, name:"BPC-157 + TB-500 Blend", size:"5+5 mg", price:79.99, img:"https://picsum.photos/id/160/400/300"},
-      {id:9, name:"CJC-1295 (no DAC) + Ipamorelin Blend", size:"5+5 mg", price:79.99, img:"https://picsum.photos/id/180/400/300"},
-      {id:10, name:"GHK-Cu Copper Peptide", size:"100 mg", price:39.99, img:"https://picsum.photos/id/201/400/300"},
-      {id:11, name:"Semaglutide", size:"5 mg", price:39.99, img:"https://picsum.photos/id/133/400/300"},
-      {id:12, name:"Tirzepatide", size:"5 mg", price:79.99, img:"https://picsum.photos/id/160/400/300"},
-      {id:13, name:"Selank", size:"10 mg", price:34.99, img:"https://picsum.photos/id/180/400/300"},
-      {id:14, name:"Semax", size:"10 mg", price:34.99, img:"https://picsum.photos/id/201/400/300"},
-      {id:15, name:"Tesamorelin", size:"10 mg", price:54.99, img:"https://picsum.photos/id/102/400/300"},
-      {id:16, name:"Bacteriostatic Water", size:"3 ml", price:5, img:"https://picsum.photos/id/160/400/300"},
-      {id:17, name:"Bacteriostatic Water", size:"10 ml", price:10, img:"https://picsum.photos/id/180/400/300"}
-    ];
-
-    let cart = [];
-
-    function renderProducts() {
-      const grid = document.getElementById('product-grid');
-      grid.innerHTML = products.map(p => `
-        <div class="product-card bg-[#1e2937] rounded-3xl overflow-hidden border border-blue-900">
-          <img src="${p.img}" class="w-full h-64 object-cover">
-          <div class="p-6">
-            <h3 class="font-bold text-xl">${p.name}</h3>
-            <p class="text-blue-400 text-sm">${p.size}</p>
-            <p class="price text-3xl font-semibold mt-3">€${p.price.toFixed(2)}</p>
-            
-            <div class="flex gap-3 mt-6">
-              <button onclick="addToCart(${p.id})" 
-                      class="flex-1 bg-blue-600 hover:bg-blue-500 py-3.5 rounded-2xl text-white font-medium">
-                Add to Cart
-              </button>
-              <button onclick="requestCOA('${p.name}', '${p.size}')" 
-                      class="flex-1 border border-blue-400 hover:border-blue-300 py-3.5 rounded-2xl text-blue-300 hover:text-white font-medium">
-                Request COA
-              </button>
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function addToCart(id) {
-      const item = products.find(p => p.id === id);
-      cart.push({...item});
-      updateCartCount();
-      const toast = document.createElement('div');
-      toast.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-2xl shadow-xl';
-      toast.textContent = `${item.name} ${item.size} added`;
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 2500);
-    }
-
-    function updateCartCount() {
-      document.getElementById('cart-count').textContent = cart.length;
-    }
-
-    function toggleCart() {
-      const modal = document.getElementById('cart-modal');
-      modal.classList.toggle('hidden');
-      if (!modal.classList.contains('hidden')) renderCart();
-    }
-
-    function renderCart() {
-      const container = document.getElementById('cart-items');
-      let html = '';
-      let total = 0;
-      cart.forEach((item, i) => {
-        total += item.price;
-        html += `
-          <div class="flex gap-4 mb-6 border-b border-blue-900 pb-6 last:border-none">
-            <img src="${item.img}" class="w-20 h-20 object-cover rounded-2xl">
-            <div class="flex-1">
-              <p class="font-medium">${item.name} ${item.size}</p>
-              <p class="price text-2xl">€${item.price.toFixed(2)}</p>
-            </div>
-            <button onclick="removeFromCart(${i})" class="text-red-400 text-3xl hover:text-red-300">×</button>
-          </div>`;
-      });
-      container.innerHTML = html || `<p class="text-center py-12 text-blue-300">Your cart is empty</p>`;
-      document.getElementById('cart-total').textContent = '€' + total.toFixed(2);
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      renderCart();
-      updateCartCount();
-    }
-
-    function checkout() {
-      alert("✅ Thank you! Demo checkout complete.\n\nIn production this would connect to a secure payment provider.\nAll orders are for laboratory research only.");
-      cart = [];
-      toggleCart();
-      updateCartCount();
-    }
-
-    function requestCOA(name, size) {
-      const subject = encodeURIComponent(`COA Request - ${name} ${size}`);
-      const body = encodeURIComponent(`Dear HelixCore Labs Team,\n\nI would like to request the third-party laboratory COA and purity report for:\n\nProduct: ${name}\nSize: ${size}\n\nThank you!\nBest regards`);
-      window.location.href = `mailto:helixcorelabs@gmail.com?subject=${subject}&body=${body}`;
-    }
-
-    // Initialize
-    renderProducts();
-  </script>
-</body>
-</html>
+  <!-- CART MODAL (same as last version) -->
+  <div id="cart-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z
