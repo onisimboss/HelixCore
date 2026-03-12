@@ -12,7 +12,7 @@
     .product-card { transition: all 0.3s; }
     .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
     .price { color: #60a5fa; }
-    .purity { background: #10b981; }
+    .purity-badge { background: #10b981; color: white; }
   </style>
 </head>
 <body class="font-sans">
@@ -34,25 +34,24 @@
     </div>
   </nav>
 
-  <!-- HERO (Nova style) -->
+  <!-- HERO + TRUST BAR (Nova style) -->
   <section class="hero-bg py-24 text-center">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-5xl font-bold mb-6">Built for Advanced Research</h2>
       <div class="flex flex-wrap justify-center gap-8 text-sm text-blue-300">
-        <div class="flex items-center gap-2"><i class="fa-solid fa-flask"></i> >99% Purity</div>
-        <div class="flex items-center gap-2"><i class="fa-solid fa-certificate"></i> 3rd Party Lab Tested</div>
-        <div class="flex items-center gap-2"><i class="fa-solid fa-headset"></i> 24/7 Support</div>
-        <div class="flex items-center gap-2"><i class="fa-solid fa-truck"></i> Fast EU Shipping</div>
+        <div><i class="fa-solid fa-flask"></i> 99%+ Purity</div>
+        <div><i class="fa-solid fa-certificate"></i> 3rd Party Tested</div>
+        <div><i class="fa-solid fa-truck"></i> Fast Shipping</div>
+        <div><i class="fa-solid fa-headset"></i> Dedicated Support</div>
       </div>
       <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" class="mt-10 bg-blue-600 hover:bg-blue-500 text-white text-xl font-semibold px-12 py-5 rounded-3xl">Browse Catalog →</button>
     </div>
   </section>
 
-  <!-- DISCLAIMER (Nova style, slightly reworded) -->
+  <!-- DISCLAIMER (Nova style, slightly reworded for safety) -->
   <div class="bg-red-700 py-6 text-center text-white text-sm font-medium">
-    <strong>Important Notice</strong><br>
-    All products are strictly for laboratory and research use only.<br>
-    Not approved for human or animal consumption. By purchasing you confirm you are 21+ and agree to these terms.
+    <strong>FOR LABORATORY RESEARCH USE ONLY</strong><br>
+    Not for human or veterinary consumption. By purchasing you confirm you are 21+.
   </div>
 
   <!-- CATALOG -->
@@ -63,32 +62,15 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="product-grid"></div>
   </section>
 
-  <!-- FOOTER (Nova style) -->
+  <!-- FOOTER -->
   <footer class="bg-[#0a0f1c] py-12 text-center text-blue-300 text-sm border-t border-blue-900">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-      <div>
-        <h3 class="font-bold mb-4">HelixCore Labs</h3>
-        <p>Backed by science. Built for research.</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-3">Quick Links</h4>
-        <p class="text-xs space-y-1">Shop • FAQ • Shipping • Contact</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-3">Support</h4>
-        <p class="text-xs">helixcorelabs@gmail.com</p>
-      </div>
-      <div>
-        <h4 class="font-semibold mb-3">Stay Updated</h4>
-        <input type="email" placeholder="Your email" class="w-full p-3 bg-[#1e2937] rounded-2xl text-sm">
-      </div>
-    </div>
-    <p class="mt-12 opacity-70">© 2026 HelixCore Labs • All Rights Reserved • Not a 1:1 copy of any other site</p>
+    <p class="font-medium">© 2026 HelixCore Labs • All Rights Reserved</p>
+    <p class="mt-2">Contact: <a href="mailto:helixcorelabs@gmail.com" class="hover:text-blue-400">helixcorelabs@gmail.com</a></p>
   </footer>
 
   <!-- CART MODAL -->
   <div id="cart-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-    <div class="bg-[#0f172a] rounded-3xl max-w-md w-full mx-4 overflow-hidden">
+    <div class="bg-[#0f172a] rounded-3xl max-w-md w-full mx-4 overflow-hidden border border-blue-900">
       <div class="p-6 border-b flex justify-between">
         <h3 class="text-2xl font-bold">Your Cart</h3>
         <button onclick="toggleCart()" class="text-4xl">×</button>
@@ -99,19 +81,27 @@
         <span id="cart-total" class="price">€0.00</span>
       </div>
       <div class="p-6 flex gap-4">
-        <button onclick="toggleCart()" class="flex-1 py-4 border rounded-2xl">Continue</button>
+        <button onclick="toggleCart()" class="flex-1 py-4 border rounded-2xl">Continue Shopping</button>
         <button onclick="checkout()" class="flex-1 py-4 bg-green-600 text-white rounded-2xl">Checkout</button>
       </div>
     </div>
   </div>
 
   <script>
-    // Your products + real vial images
     const products = [
-      {id:1, name:"Retatrutide (Reta)", img:"https://picsum.photos/id/1015/400/300", shortDesc:"Triple agonist for metabolic research.", variants:[{size:"10 mg", price:49.99},{size:"20 mg", price:79.99},{size:"30 mg", price:109.99},{size:"60 mg", price:189.99}]},
+      {id:1, name:"Retatrutide (Reta)", img:"https://picsum.photos/id/1015/400/300", shortDesc:"Triple agonist for advanced metabolic research.", variants:[{size:"10 mg", price:49.99},{size:"20 mg", price:79.99},{size:"30 mg", price:109.99},{size:"60 mg", price:189.99}]},
       {id:2, name:"BPC-157", img:"https://picsum.photos/id/160/400/300", shortDesc:"Body Protection Compound – regenerative research.", variants:[{size:"5 mg", price:29.99},{size:"10 mg", price:49.99}]},
-      {id:3, name:"TB-500", img:"https://picsum.photos/id/133/400/300", shortDesc:"Thymosin Beta-4 for tissue repair.", variants:[{size:"5 mg", price:49.99}]},
-      // ... (all your other products exactly as before – full list included in the paste)
+      {id:3, name:"TB-500", img:"https://picsum.photos/id/133/400/300", shortDesc:"Thymosin Beta-4 for tissue repair studies.", variants:[{size:"5 mg", price:49.99}]},
+      {id:4, name:"BPC-157 + TB-500 Blend", img:"https://picsum.photos/id/180/400/300", shortDesc:"Ultimate recovery blend.", variants:[{size:"5+5 mg", price:79.99}]},
+      {id:5, name:"CJC-1295 (no DAC) + Ipamorelin", img:"https://picsum.photos/id/201/400/300", shortDesc:"GH release blend (no DAC).", variants:[{size:"5+5 mg", price:79.99}]},
+      {id:6, name:"CJC-1295 (with DAC) + Ipamorelin", img:"https://picsum.photos/id/30/400/300", shortDesc:"Long-acting GH release blend.", variants:[{size:"5+5 mg", price:89.99}]},
+      {id:7, name:"Ipamorelin", img:"https://picsum.photos/id/31/400/300", shortDesc:"Clean GH secretagogue.", variants:[{size:"5 mg", price:59.99}]},
+      {id:8, name:"GHK-Cu Copper Peptide", img:"https://picsum.photos/id/32/400/300", shortDesc:"Collagen & skin regeneration.", variants:[{size:"100 mg", price:39.99}]},
+      {id:9, name:"Semaglutide", img:"https://picsum.photos/id/133/400/300", shortDesc:"GLP-1 agonist research.", variants:[{size:"5 mg", price:39.99}]},
+      {id:10, name:"Tirzepatide", img:"https://picsum.photos/id/160/400/300", shortDesc:"Dual GIP/GLP-1 agonist.", variants:[{size:"5 mg", price:79.99}]},
+      {id:11, name:"Selank", img:"https://picsum.photos/id/180/400/300", shortDesc:"Anxiolytic nootropic.", variants:[{size:"10 mg", price:34.99}]},
+      {id:12, name:"Semax", img:"https://picsum.photos/id/201/400/300", shortDesc:"Neuroprotective cognitive research.", variants:[{size:"10 mg", price:34.99}]},
+      {id:13, name:"Tesamorelin", img:"https://picsum.photos/id/29/400/300", shortDesc:"GHRH for fat reduction.", variants:[{size:"10 mg", price:54.99}]},
       {id:14, name:"Bacteriostatic Water", img:"https://picsum.photos/id/30/400/300", shortDesc:"Sterile solvent for reconstitution.", variants:[{size:"3 ml", price:5},{size:"10 ml", price:10}]}
     ];
 
@@ -123,22 +113,22 @@
         const def = p.variants[0];
         return `
           <div class="product-card bg-[#1e2937] rounded-3xl overflow-hidden border border-blue-900">
-            <img src="${p.img}" class="w-full h-64 object-cover">
+            <img src="${p.img}" class="w-full h-64 object-cover" alt="${p.name}">
             <div class="p-6">
               <div class="flex justify-between items-start">
                 <h3 class="font-bold text-xl">${p.name}</h3>
-                <span class="purity text-white text-xs px-3 py-1 rounded-2xl">99%+ Purity</span>
+                <span class="purity-badge text-xs px-3 py-1 rounded-2xl">99%+ Purity</span>
               </div>
               <p class="text-blue-300 text-sm mt-2">${p.shortDesc}</p>
               
-              <select id="variant-${p.id}" class="w-full mt-4 p-3 rounded-2xl text-white">${p.variants.map(v => `<option value="${v.size}" data-price="${v.price}">${v.size} – €${v.price}</option>`).join('')}</select>
+              <select id="variant-${p.id}" class="w-full mt-4 p-3 rounded-2xl text-white">${p.variants.map(v => `<option value="${v.size}" data-price="${v.price}">${v.size} – €${v.price.toFixed(2)}</option>`).join('')}</select>
               
               <div class="flex items-center gap-3 mt-4">
                 <span class="text-sm">Qty</span>
-                <input type="number" id="qty-${p.id}" value="1" min="1" class="w-16 p-2 text-center rounded-2xl bg-[#0f172a]">
+                <input type="number" id="qty-${p.id}" value="1" min="1" max="10" class="w-16 p-2 text-center rounded-2xl">
               </div>
               
-              <p id="price-${p.id}" class="price text-3xl font-semibold mt-4">€${def.price}</p>
+              <p id="price-${p.id}" class="price text-3xl font-semibold mt-4">€${def.price.toFixed(2)}</p>
               
               <button onclick="addToCart(${p.id})" class="mt-6 w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl text-white font-medium">Add to Cart</button>
             </div>
@@ -146,13 +136,56 @@
       }).join('');
     }
 
-    // Full working cart + COA (same as before, fully tested)
-    function addToCart(id) { /* full logic */ }
-    function requestCOA(id) { /* full logic */ }
-    function toggleCart() { /* full logic */ }
-    function renderCart() { /* full logic */ }
-    function checkout() { /* full logic */ }
+    function addToCart(id) {
+      const p = products.find(prod => prod.id === id);
+      const select = document.getElementById(`variant-${id}`);
+      const qtyInput = document.getElementById(`qty-${id}`);
+      const selected = select.options[select.selectedIndex];
+      const size = selected.value;
+      const price = parseFloat(selected.dataset.price);
+      const qty = parseInt(qtyInput.value) || 1;
 
+      for (let i = 0; i < qty; i++) {
+        cart.push({name: p.name, size, price, img: p.img});
+      }
+      updateCartCount();
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-2xl shadow-xl z-50';
+      toast.textContent = `${qty}× ${p.name} ${size} added`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
+    }
+
+    function updateCartCount() { document.getElementById('cart-count').textContent = cart.length; }
+    function toggleCart() {
+      const modal = document.getElementById('cart-modal');
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) renderCart();
+    }
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      let html = '';
+      let total = 0;
+      cart.forEach((item, i) => {
+        total += item.price;
+        html += `<div class="flex gap-4 mb-6 border-b border-blue-900 pb-6">
+          <img src="${item.img}" class="w-20 h-20 object-cover rounded-2xl">
+          <div class="flex-1"><p>${item.name} ${item.size}</p><p class="price">€${item.price.toFixed(2)}</p></div>
+          <button onclick="removeFromCart(${i})" class="text-red-400">×</button>
+        </div>`;
+      });
+      container.innerHTML = html || '<p class="text-center py-12 text-blue-300">Cart empty</p>';
+      document.getElementById('cart-total').textContent = '€' + total.toFixed(2);
+    }
+    function removeFromCart(i) { cart.splice(i, 1); renderCart(); updateCartCount(); }
+    function checkout() {
+      alert("✅ Demo checkout complete!\nConnect Stripe/PayPal later.");
+      cart = [];
+      toggleCart();
+      updateCartCount();
+    }
+
+    // Init
     renderProducts();
   </script>
 </body>
