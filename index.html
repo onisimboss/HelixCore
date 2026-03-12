@@ -17,7 +17,7 @@
 </head>
 <body class="font-sans">
 
-  <!-- HEADER (Nova style) -->
+  <!-- HEADER -->
   <nav class="bg-[#0f172a] sticky top-0 z-50 border-b border-blue-900">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <div class="flex items-center gap-3">
@@ -34,7 +34,7 @@
     </div>
   </nav>
 
-  <!-- HERO + TRUST BAR (Nova style) -->
+  <!-- HERO -->
   <section class="hero-bg py-24 text-center">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-5xl font-bold mb-6">Built for Advanced Research</h2>
@@ -48,13 +48,13 @@
     </div>
   </section>
 
-  <!-- DISCLAIMER (Nova style, slightly reworded for safety) -->
+  <!-- DISCLAIMER -->
   <div class="bg-red-700 py-6 text-center text-white text-sm font-medium">
     <strong>FOR LABORATORY RESEARCH USE ONLY</strong><br>
     Not for human or veterinary consumption. By purchasing you confirm you are 21+.
   </div>
 
-  <!-- CATALOG -->
+  <!-- SHOP -->
   <section id="shop" class="max-w-7xl mx-auto px-6 py-16">
     <h2 class="text-4xl font-bold text-center mb-4">Our Research Catalog</h2>
     <p class="text-center text-blue-300 mb-12">All prices in € • Size selector • COA on request</p>
@@ -136,6 +136,7 @@
       }).join('');
     }
 
+    // Full cart logic (addToCart, toggle, etc.) — exactly the same as the working version before
     function addToCart(id) {
       const p = products.find(prod => prod.id === id);
       const select = document.getElementById(`variant-${id}`);
@@ -179,13 +180,12 @@
     }
     function removeFromCart(i) { cart.splice(i, 1); renderCart(); updateCartCount(); }
     function checkout() {
-      alert("✅ Demo checkout complete!\nConnect Stripe/PayPal later.");
+      alert("✅ Demo checkout complete!\nAll orders for research only.");
       cart = [];
       toggleCart();
       updateCartCount();
     }
 
-    // Init
     renderProducts();
   </script>
 </body>
