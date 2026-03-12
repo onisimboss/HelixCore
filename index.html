@@ -12,12 +12,12 @@
     .product-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     .product-card:hover { transform: translateY(-12px); box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
     .price { color: #60a5fa; }
-    select { background: #1e2937; color: #e0f2ff; border: 1px solid #3b82f6; }
+    select { background: #1e2937; color: #e0f2ff; border: 1px solid #3b82f6; border-radius: 16px; }
   </style>
 </head>
 <body class="font-sans">
 
-  <!-- NAV + HERO + TRUST BAR + DISCLAIMER (same as before) -->
+  <!-- NAV -->
   <nav class="bg-[#0f172a] border-b border-blue-900 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <div class="flex items-center gap-3">
@@ -34,15 +34,19 @@
     </div>
   </nav>
 
+  <!-- HERO -->
   <section class="hero-bg py-28 text-center">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-6xl font-bold mb-4 tracking-tighter">HelixCore Labs</h2>
       <p class="text-3xl text-blue-300 mb-6">Premium Research Peptides & Compounds</p>
-      <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" class="bg-blue-600 hover:bg-blue-500 text-white text-xl font-semibold px-14 py-6 rounded-3xl">Explore Our Catalog →</button>
+      <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" class="bg-blue-600 hover:bg-blue-500 text-white text-xl font-semibold px-14 py-6 rounded-3xl shadow-lg">Explore Our Catalog →</button>
     </div>
   </section>
 
-  <div class="bg-red-950 py-4 text-center text-red-400 text-sm font-medium">⚠️ FOR LABORATORY RESEARCH PURPOSES ONLY — NOT FOR HUMAN OR VETERINARY CONSUMPTION</div>
+  <!-- DISCLAIMER (red bar like your screenshot) -->
+  <div class="bg-red-600 py-4 text-center text-white text-sm font-medium tracking-wide">
+    ⚠️ FOR LABORATORY RESEARCH PURPOSES ONLY — NOT FOR HUMAN OR VETERINARY CONSUMPTION
+  </div>
 
   <!-- SHOP -->
   <section id="shop" class="max-w-7xl mx-auto px-6 py-16">
@@ -52,19 +56,18 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="product-grid"></div>
   </section>
 
-  <!-- FOOTER (same) -->
+  <!-- FOOTER -->
   <footer class="bg-[#0a0f1c] py-12 text-center text-blue-300 text-sm border-t border-blue-900">
     <p class="font-medium">© 2026 HelixCore Labs • All Rights Reserved</p>
     <p class="mt-2">Contact: <a href="mailto:helixcorelabs@gmail.com" class="hover:text-blue-400">helixcorelabs@gmail.com</a></p>
   </footer>
 
-  <!-- CART MODAL (same as last version) -->
+  <!-- CART MODAL -->
   <div id="cart-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-    <!-- ... (exact same cart modal code from previous message) ... -->
     <div class="bg-[#0f172a] rounded-3xl max-w-md w-full mx-4 overflow-hidden border border-blue-900">
       <div class="p-6 border-b border-blue-900 flex justify-between items-center">
         <h3 class="text-2xl font-bold">Your Cart</h3>
-        <button onclick="toggleCart()" class="text-4xl text-blue-400">×</button>
+        <button onclick="toggleCart()" class="text-4xl text-blue-400 hover:text-white">×</button>
       </div>
       <div id="cart-items" class="p-6 max-h-[420px] overflow-auto"></div>
       <div class="p-6 border-t border-blue-900 text-2xl font-semibold flex justify-between">
@@ -109,7 +112,7 @@
               <h3 class="font-bold text-xl">${p.name}</h3>
               <p class="text-blue-300 text-sm mt-1">${p.shortDesc}</p>
               
-              <select id="variant-select-${p.id}" class="w-full mt-4 p-3 rounded-2xl text-white">
+              <select id="variant-select-${p.id}" class="w-full mt-4 p-3 text-white">
                 ${p.variants.map(v => `<option value="${v.size}" data-price="${v.price}">${v.size} – €${v.price.toFixed(2)}</option>`).join('')}
               </select>
               
@@ -122,14 +125,12 @@
             </div>
           </div>`;
       }).join('');
-      
-      // Attach listeners
+
+      // Attach price updater
       setTimeout(() => {
         products.forEach(p => {
           const select = document.getElementById(`variant-select-${p.id}`);
-          if (select) {
-            select.addEventListener('change', () => updatePrice(p.id));
-          }
+          if (select) select.addEventListener('change', () => updatePrice(p.id));
         });
       }, 100);
     }
@@ -138,8 +139,8 @@
       const select = document.getElementById(`variant-select-${id}`);
       const priceSpan = document.getElementById(`price-${id}`);
       if (!select || !priceSpan) return;
-      const selected = select.options[select.selectedIndex];
-      priceSpan.textContent = `€${parseFloat(selected.dataset.price).toFixed(2)}`;
+      const selectedPrice = select.options[select.selectedIndex].dataset.price;
+      priceSpan.textContent = `€${parseFloat(selectedPrice).toFixed(2)}`;
     }
 
     function addToCart(id) {
@@ -166,18 +167,52 @@
       const size = selected.value;
       
       const subject = encodeURIComponent(`COA Request - ${p.name} ${size}`);
-      const body = encodeURIComponent(`Dear HelixCore Labs,\n\nPlease send the third-party COA for:\nProduct: ${p.name}\nSize: ${size}\n\nThank you!`);
+      const body = encodeURIComponent(`Dear HelixCore Labs Team,\n\nPlease send the third-party COA for:\nProduct: ${p.name}\nSize: ${size}\n\nThank you!`);
       window.location.href = `mailto:helixcorelabs@gmail.com?subject=${subject}&body=${body}`;
     }
 
-    // Cart functions (toggleCart, renderCart, remove, checkout) – exactly the same as last version
     function updateCartCount() { document.getElementById('cart-count').textContent = cart.length; }
-    function toggleCart() { /* same as before */ }
-    function renderCart() { /* same as before */ }
-    function removeFromCart(index) { /* same */ }
-    function checkout() { /* same */ }
 
-    // Init
+    function toggleCart() {
+      const modal = document.getElementById('cart-modal');
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      let html = '';
+      let total = 0;
+      cart.forEach((item, i) => {
+        total += item.price;
+        html += `
+          <div class="flex gap-4 mb-6 border-b border-blue-900 pb-6 last:border-none">
+            <img src="${item.img}" class="w-20 h-20 object-cover rounded-2xl">
+            <div class="flex-1">
+              <p class="font-medium">${item.name} ${item.size}</p>
+              <p class="price text-2xl">€${item.price.toFixed(2)}</p>
+            </div>
+            <button onclick="removeFromCart(${i})" class="text-red-400 text-3xl hover:text-red-300">×</button>
+          </div>`;
+      });
+      container.innerHTML = html || `<p class="text-center py-12 text-blue-300">Your cart is empty</p>`;
+      document.getElementById('cart-total').textContent = '€' + total.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      renderCart();
+      updateCartCount();
+    }
+
+    function checkout() {
+      alert("✅ Thank you! Demo checkout complete.\n\nIn production this would connect to a secure payment provider.\nAll orders are for laboratory research only.");
+      cart = [];
+      toggleCart();
+      updateCartCount();
+    }
+
+    // Initialize everything
     renderProducts();
   </script>
 </body>
