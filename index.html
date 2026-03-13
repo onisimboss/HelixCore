@@ -8,15 +8,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     html { scroll-behavior: smooth; }
-    body { background: #0a0f1c; color: #e0f2ff; font-family: system-ui, -apple-system, sans-serif; overscroll-behavior-y: none; }
+    body { 
+      background: #0a0f1c; 
+      color: #e0f2ff; 
+      font-family: system-ui, -apple-system, sans-serif; 
+      overscroll-behavior-y: none;
+    }
     .hero-bg { background: linear-gradient(135deg, #0a0f1c 0%, #1e3a8a 100%); }
-    .product-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-    .product-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px -15px rgb(0 0 0 / 0.4); }
+    .product-card { transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    .product-card:hover { transform: translateY(-15px); }
     .price { color: #60a5fa; }
     .purity-badge { background: #10b981; color: white; }
-    nav { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    nav { 
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+      will-change: transform;
+    }
     nav.hidden { transform: translateY(-100%); }
-    button { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
   </style>
 </head>
 <body class="font-sans">
@@ -71,7 +78,7 @@
   </div>
 
   <!-- SHOP -->
-  <section id="shop" class="max-w-7xl mx-auto px-8 py-28">
+  <section id="shop" class="max-w-7xl mx-auto px-8 py-28 pb-40">
     <h2 class="text-6xl font-bold text-center mb-8">Our Research Catalog</h2>
     <p class="text-center text-blue-300 mb-20 text-2xl">All prices in € • Size selector • COA on request</p>
     
@@ -123,14 +130,24 @@
 
     let cart = [];
     let lastScroll = 0;
+    let ticking = false;
 
-    // Smooth header hide
+    // Super smooth header hide using rAF
     window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      const current = window.scrollY;
-      if (current > lastScroll && current > 150) header.classList.add('hidden');
-      else header.classList.remove('hidden');
-      lastScroll = current;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const header = document.getElementById('header');
+          const current = window.scrollY;
+          if (current > lastScroll && current > 150) {
+            header.classList.add('hidden');
+          } else {
+            header.classList.remove('hidden');
+          }
+          lastScroll = current;
+          ticking = false;
+        });
+        ticking = true;
+      }
     });
 
     function renderProducts() {
@@ -213,6 +230,7 @@
       else alert("You must be over 21 to access this site.");
     }
 
+    // Init
     renderProducts();
   </script>
 </body>
