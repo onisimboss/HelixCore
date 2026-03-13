@@ -8,98 +8,97 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     html { scroll-behavior: smooth; }
-    body { background: #0a0f1c; color: #e0f2ff; font-family: system-ui, -apple-system, sans-serif; }
+    body { background: #0a0f1c; color: #e0f2ff; font-family: system-ui, -apple-system, sans-serif; overscroll-behavior-y: none; }
     .hero-bg { background: linear-gradient(135deg, #0a0f1c 0%, #1e3a8a 100%); }
-    .product-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .product-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); }
+    .product-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    .product-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px -15px rgb(0 0 0 / 0.4); }
     .price { color: #60a5fa; }
     .purity-badge { background: #10b981; color: white; }
-    nav { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    nav { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
     nav.hidden { transform: translateY(-100%); }
-    #age-modal { animation: fadeIn 0.4s; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    button { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
   </style>
 </head>
 <body class="font-sans">
 
-  <!-- AGE VERIFICATION POPUP -->
+  <!-- AGE VERIFICATION -->
   <div id="age-modal" class="fixed inset-0 bg-black/95 flex items-center justify-center z-[9999]">
-    <div class="max-w-md w-full mx-4 bg-[#1e2937] rounded-3xl p-10 text-center">
-      <i class="fa-solid fa-shield-alt text-6xl text-red-500 mb-6"></i>
-      <h2 class="text-4xl font-bold mb-6">Age Verification</h2>
-      <p class="text-xl text-blue-300 mb-10">You must be over 21 years old to access this research site.</p>
-      <div class="flex gap-4">
-        <button onclick="ageVerify(true)" class="flex-1 py-6 bg-green-600 hover:bg-green-500 rounded-3xl text-2xl font-medium">Yes, I am over 21</button>
-        <button onclick="ageVerify(false)" class="flex-1 py-6 border border-red-500 hover:bg-red-900 rounded-3xl text-2xl font-medium">No, I am under 21</button>
+    <div class="max-w-md w-full mx-6 bg-[#1e2937] rounded-3xl p-12 text-center">
+      <i class="fa-solid fa-shield-alt text-7xl text-red-500 mb-8"></i>
+      <h2 class="text-5xl font-bold mb-8">Age Verification</h2>
+      <p class="text-2xl text-blue-300 mb-12">You must be over 21 to access this research site.</p>
+      <div class="flex gap-6">
+        <button onclick="ageVerify(true)" class="flex-1 py-7 bg-green-600 hover:bg-green-500 rounded-3xl text-3xl font-medium">Yes, I am over 21</button>
+        <button onclick="ageVerify(false)" class="flex-1 py-7 border border-red-500 hover:bg-red-900 rounded-3xl text-3xl font-medium">No, under 21</button>
       </div>
     </div>
   </div>
 
-  <!-- HEADER (smooth hide on scroll) -->
+  <!-- HEADER -->
   <nav id="header" class="bg-[#0f172a] sticky top-0 z-50 border-b border-blue-900">
-    <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
-      <div class="flex items-center gap-4">
-        <i class="fa-solid fa-dna text-5xl text-blue-400"></i>
+    <div class="max-w-7xl mx-auto px-8 py-8 flex justify-between items-center">
+      <div class="flex items-center gap-6">
+        <i class="fa-solid fa-dna text-6xl text-blue-400"></i>
         <div>
-          <h1 class="text-4xl font-bold tracking-tighter">HelixCore Labs</h1>
-          <p class="text-sm text-blue-300 -mt-1">Premium Research Compounds • 99%+ Purity</p>
+          <h1 class="text-5xl font-bold tracking-tighter">HelixCore Labs</h1>
+          <p class="text-lg text-blue-300 -mt-1">Premium Research Compounds • 99%+ Purity</p>
         </div>
       </div>
-      <button onclick="toggleCart()" class="flex items-center gap-3 bg-blue-600 hover:bg-blue-500 px-10 py-4 rounded-3xl text-white font-medium text-lg">
-        <i class="fa-solid fa-cart-shopping"></i>
+      <button onclick="toggleCart()" class="flex items-center gap-4 bg-blue-600 hover:bg-blue-500 px-12 py-6 rounded-3xl text-white font-medium text-2xl">
+        <i class="fa-solid fa-cart-shopping text-3xl"></i>
         <span id="cart-count" class="font-bold">0</span>
       </button>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="hero-bg py-32 text-center">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-6xl font-bold mb-8 tracking-tighter">Built for Advanced Research</h2>
-      <div class="flex flex-wrap justify-center gap-10 text-sm text-blue-300">
-        <div class="flex items-center gap-3"><i class="fa-solid fa-flask text-2xl"></i> 99%+ Purity</div>
-        <div class="flex items-center gap-3"><i class="fa-solid fa-certificate text-2xl"></i> Third-Party Tested</div>
-        <div class="flex items-center gap-3"><i class="fa-solid fa-truck text-2xl"></i> Fast & Discreet Shipping</div>
-        <div class="flex items-center gap-3"><i class="fa-solid fa-headset text-2xl"></i> Dedicated Support</div>
+  <section class="hero-bg py-40 text-center">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-7xl font-bold mb-10 tracking-tighter">Built for Advanced Research</h2>
+      <div class="flex flex-wrap justify-center gap-12 text-lg text-blue-300">
+        <div class="flex items-center gap-4"><i class="fa-solid fa-flask text-4xl"></i> 99%+ Purity</div>
+        <div class="flex items-center gap-4"><i class="fa-solid fa-certificate text-4xl"></i> Third-Party Tested</div>
+        <div class="flex items-center gap-4"><i class="fa-solid fa-truck text-4xl"></i> Fast & Discreet Shipping</div>
+        <div class="flex items-center gap-4"><i class="fa-solid fa-headset text-4xl"></i> Dedicated Support</div>
       </div>
-      <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" class="mt-14 bg-blue-600 hover:bg-blue-500 text-white text-2xl font-semibold px-16 py-7 rounded-3xl shadow-2xl">Browse the Catalog</button>
+      <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" class="mt-16 bg-blue-600 hover:bg-blue-500 text-white text-3xl font-semibold px-20 py-8 rounded-3xl shadow-2xl">Browse the Catalog</button>
     </div>
   </section>
 
   <!-- DISCLAIMER -->
-  <div class="bg-red-700 py-7 text-center text-white text-base font-medium">
+  <div class="bg-red-700 py-8 text-center text-white text-xl font-medium">
     FOR LABORATORY RESEARCH USE ONLY — NOT FOR HUMAN OR VETERINARY CONSUMPTION
   </div>
 
   <!-- SHOP -->
-  <section id="shop" class="max-w-7xl mx-auto px-6 py-20">
-    <h2 class="text-5xl font-bold text-center mb-6">Our Research Catalog</h2>
-    <p class="text-center text-blue-300 mb-16 text-lg">All prices in € • Size selector • COA on request</p>
+  <section id="shop" class="max-w-7xl mx-auto px-8 py-28">
+    <h2 class="text-6xl font-bold text-center mb-8">Our Research Catalog</h2>
+    <p class="text-center text-blue-300 mb-20 text-2xl">All prices in € • Size selector • COA on request</p>
     
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10" id="product-grid"></div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12" id="product-grid"></div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="bg-[#0a0f1c] py-16 text-center text-blue-300 text-sm border-t border-blue-900">
-    <p class="font-medium text-lg">© 2026 HelixCore Labs • All Rights Reserved</p>
-    <p class="mt-4">Contact: <a href="mailto:helixcorelabs@gmail.com" class="hover:text-blue-400 underline">helixcorelabs@gmail.com</a></p>
+  <footer class="bg-[#0a0f1c] py-20 text-center text-blue-300 text-lg border-t border-blue-900">
+    <p class="font-medium">© 2026 HelixCore Labs • All Rights Reserved</p>
+    <p class="mt-6">Contact: <a href="mailto:helixcorelabs@gmail.com" class="hover:text-blue-400 underline">helixcorelabs@gmail.com</a></p>
   </footer>
 
   <!-- CART MODAL -->
   <div id="cart-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-    <div class="bg-[#0f172a] rounded-3xl max-w-md w-full mx-4 overflow-hidden border border-blue-900">
-      <div class="p-8 border-b flex justify-between items-center">
-        <h3 class="text-3xl font-bold">Your Cart</h3>
-        <button onclick="toggleCart()" class="text-5xl text-blue-400">×</button>
+    <div class="bg-[#0f172a] rounded-3xl max-w-md w-full mx-6 overflow-hidden border border-blue-900">
+      <div class="p-10 border-b flex justify-between items-center">
+        <h3 class="text-4xl font-bold">Your Cart</h3>
+        <button onclick="toggleCart()" class="text-6xl text-blue-400">×</button>
       </div>
-      <div id="cart-items" class="p-8 max-h-96 overflow-auto"></div>
-      <div class="p-8 border-t text-3xl flex justify-between font-semibold">
+      <div id="cart-items" class="p-10 max-h-96 overflow-auto"></div>
+      <div class="p-10 border-t text-4xl flex justify-between font-semibold">
         <span>Total</span>
         <span id="cart-total" class="price">€0.00</span>
       </div>
-      <div class="p-8 flex gap-4">
-        <button onclick="toggleCart()" class="flex-1 py-5 border border-blue-700 rounded-3xl text-lg">Continue Shopping</button>
-        <button onclick="checkout()" class="flex-1 py-5 bg-green-600 hover:bg-green-500 text-white rounded-3xl text-lg">Proceed to Checkout</button>
+      <div class="p-10 flex gap-6">
+        <button onclick="toggleCart()" class="flex-1 py-7 border border-blue-700 rounded-3xl text-2xl">Continue Shopping</button>
+        <button onclick="checkout()" class="flex-1 py-7 bg-green-600 hover:bg-green-500 text-white rounded-3xl text-2xl">Proceed to Checkout</button>
       </div>
     </div>
   </div>
@@ -129,11 +128,8 @@
     window.addEventListener('scroll', () => {
       const header = document.getElementById('header');
       const current = window.scrollY;
-      if (current > lastScroll && current > 120) {
-        header.classList.add('hidden');
-      } else {
-        header.classList.remove('hidden');
-      }
+      if (current > lastScroll && current > 150) header.classList.add('hidden');
+      else header.classList.remove('hidden');
       lastScroll = current;
     });
 
@@ -143,23 +139,23 @@
         const def = p.variants[0];
         return `
           <div class="product-card bg-[#1e2937] rounded-3xl overflow-hidden border border-blue-900">
-            <div class="p-8">
+            <div class="p-10">
               <div class="flex justify-between items-start">
-                <h3 class="font-bold text-2xl">${p.name}</h3>
-                <span class="purity-badge text-xs px-4 py-1.5 rounded-3xl">99%+ Purity</span>
+                <h3 class="font-bold text-3xl">${p.name}</h3>
+                <span class="purity-badge text-sm px-6 py-2 rounded-3xl">99%+ Purity</span>
               </div>
-              <p class="text-blue-300 text-base mt-3">${p.shortDesc}</p>
+              <p class="text-blue-300 text-xl mt-6">${p.shortDesc}</p>
               
-              <select id="variant-${p.id}" class="w-full mt-6 p-4 rounded-3xl text-white text-lg">${p.variants.map(v => `<option value="${v.size}" data-price="${v.price}">${v.size} – €${v.price.toFixed(2)}</option>`).join('')}</select>
+              <select id="variant-${p.id}" class="w-full mt-8 p-6 rounded-3xl text-white text-2xl">${p.variants.map(v => `<option value="${v.size}" data-price="${v.price}">${v.size} – €${v.price.toFixed(2)}</option>`).join('')}</select>
               
-              <div class="flex items-center gap-4 mt-6">
-                <span class="text-lg">Qty</span>
-                <input type="number" id="qty-${p.id}" value="1" min="1" max="10" class="w-24 p-4 text-center text-xl rounded-3xl">
+              <div class="flex items-center gap-6 mt-8">
+                <span class="text-2xl">Qty</span>
+                <input type="number" id="qty-${p.id}" value="1" min="1" max="10" class="w-28 p-6 text-center text-3xl rounded-3xl">
               </div>
               
-              <p id="price-${p.id}" class="price text-4xl font-semibold mt-8">€${def.price.toFixed(2)}</p>
+              <p id="price-${p.id}" class="price text-5xl font-semibold mt-12">€${def.price.toFixed(2)}</p>
               
-              <button onclick="addToCart(${p.id})" class="mt-10 w-full bg-blue-600 hover:bg-blue-500 py-6 rounded-3xl text-xl font-medium">Add to Cart</button>
+              <button onclick="addToCart(${p.id})" class="mt-12 w-full bg-blue-600 hover:bg-blue-500 py-8 rounded-3xl text-3xl font-medium">Add to Cart</button>
             </div>
           </div>`;
       }).join('');
@@ -177,7 +173,7 @@
       for (let i = 0; i < qty; i++) cart.push({name: p.name, size, price});
       updateCartCount();
       const toast = document.createElement('div');
-      toast.className = 'fixed bottom-8 right-8 bg-green-600 text-white px-8 py-4 rounded-3xl shadow-2xl text-xl';
+      toast.className = 'fixed bottom-10 right-10 bg-green-600 text-white px-10 py-5 rounded-3xl shadow-2xl text-3xl';
       toast.textContent = `${qty}× ${p.name} ${size} added`;
       document.body.appendChild(toast);
       setTimeout(() => toast.remove(), 2500);
@@ -195,13 +191,13 @@
       let total = 0;
       cart.forEach((item, i) => {
         total += item.price;
-        html += `<div class="flex justify-between items-center mb-8 border-b border-blue-900 pb-8">
-          <div><p class="font-medium text-xl">${item.name} ${item.size}</p></div>
-          <p class="price text-2xl">€${item.price.toFixed(2)}</p>
-          <button onclick="removeFromCart(${i})" class="text-4xl text-red-400">×</button>
+        html += `<div class="flex justify-between items-center mb-10 border-b border-blue-900 pb-10">
+          <div><p class="font-medium text-3xl">${item.name} ${item.size}</p></div>
+          <p class="price text-4xl">€${item.price.toFixed(2)}</p>
+          <button onclick="removeFromCart(${i})" class="text-5xl text-red-400">×</button>
         </div>`;
       });
-      container.innerHTML = html || '<p class="text-center py-16 text-blue-300 text-xl">Cart is empty</p>';
+      container.innerHTML = html || '<p class="text-center py-20 text-blue-300 text-3xl">Cart is empty</p>';
       document.getElementById('cart-total').textContent = '€' + total.toFixed(2);
     }
     function removeFromCart(i) { cart.splice(i, 1); renderCart(); updateCartCount(); }
@@ -212,17 +208,11 @@
       updateCartCount();
     }
 
-    // Age verification
     function ageVerify(isOver21) {
-      if (isOver21) {
-        document.getElementById('age-modal').style.display = 'none';
-      } else {
-        alert("You must be over 21 to access this site.");
-        // You can add window.location = "about:blank" if you want to block completely
-      }
+      if (isOver21) document.getElementById('age-modal').style.display = 'none';
+      else alert("You must be over 21 to access this site.");
     }
 
-    // Init
     renderProducts();
   </script>
 </body>
